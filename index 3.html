@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pink Paradise Shop · 랜덤박스</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&display=swap">
+<style>
+:root{--a:#fbe9ff;--b:#ffe0ec;--glass:rgba(255,255,255,.62);--line:rgba(120,60,120,.18);--ink:#3b1d3f;--mute:#8a6a8c;--star:transparent;--ray:rgba(255,170,215,.55);
+--b1:#ff7ab8;--b2:#c84fd8;--gold:#b8801c;--pc:#ff7ab8;--serif:"Gowun Batang","Noto Serif KR",serif;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--a:#1a0f2e;--b:#3a1240;--glass:rgba(255,255,255,.07);--line:rgba(255,200,235,.16);--ink:#fff1f8;--mute:#c9a6cc;--star:#fff;--ray:rgba(255,160,220,.4);--gold:#ffd77a}}
+:root[data-theme="dark"]{--a:#1a0f2e;--b:#3a1240;--glass:rgba(255,255,255,.07);--line:rgba(255,200,235,.16);--ink:#fff1f8;--mute:#c9a6cc;--star:#fff;--ray:rgba(255,160,220,.4);--gold:#ffd77a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:var(--a);background:linear-gradient(170deg,var(--a),var(--b));background-attachment:fixed;color:var(--ink);font-family:-apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;animation:tw 4s ease-in-out infinite alternate;
+background-image:radial-gradient(1.6px 1.6px at 12% 14%,var(--star),transparent),radial-gradient(1.2px 1.2px at 80% 9%,var(--star),transparent),radial-gradient(2px 2px at 91% 38%,var(--star),transparent),radial-gradient(1.2px 1.2px at 7% 52%,var(--star),transparent),radial-gradient(1.6px 1.6px at 66% 70%,var(--star),transparent),radial-gradient(1.2px 1.2px at 28% 88%,var(--star),transparent),radial-gradient(2px 2px at 48% 30%,var(--star),transparent)}
+@keyframes tw{from{opacity:.35}to{opacity:1}}
+main{position:relative;max-width:440px;margin:0 auto;padding:30px 18px 56px}
+.hd{text-align:center}
+.hd small{display:block;font-size:11px;letter-spacing:.42em;color:var(--mute);margin-bottom:6px}
+.hd h1{margin:0;font:700 40px/1.1 var(--serif);background:linear-gradient(100deg,var(--b1),var(--b2) 55%,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 4px 18px rgba(255,122,184,.35))}
+.glass{background:var(--glass);border:1px solid var(--line);border-radius:26px;padding:20px;margin-top:20px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.glass h2{font:700 17px var(--serif);margin:0 0 12px;color:var(--gold)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.top .who{font:700 18px var(--serif)}
+.pill{font-size:13px;padding:6px 14px;border-radius:99px;border:1px solid var(--line);background:var(--glass)}.pill b{font:700 19px var(--serif);color:var(--gold);margin-left:4px}
+input{font:inherit;width:100%;padding:13px 16px;border-radius:16px;border:1px solid var(--line);background:var(--glass);color:var(--ink);margin:0 0 10px;outline:none}
+input:focus{border-color:var(--b1);box-shadow:0 0 0 3px rgba(255,122,184,.25)}
+.btn{font:700 17px var(--serif);width:100%;padding:15px;border:0;border-radius:99px;color:#fff;background:linear-gradient(100deg,var(--b1),var(--b2));box-shadow:0 8px 24px rgba(200,79,216,.4);cursor:pointer;letter-spacing:.04em}
+.btn:active{transform:scale(.98)}.btn:disabled{filter:grayscale(.8) brightness(.8);box-shadow:none;cursor:default}
+.btn.s{width:auto;font-size:14px;padding:9px 18px;box-shadow:none;background:var(--glass);color:var(--ink);border:1px solid var(--line)}
+.link{background:none;border:0;color:var(--mute);font:inherit;font-size:13px;text-decoration:underline;margin-top:12px;width:100%}
+.msg{font-size:13px;color:var(--mute);margin:8px 0 0}.err{color:#ff5c93}
+.stage{position:relative;height:250px;margin:6px 0 0}
+.rays{position:absolute;left:50%;top:46%;width:420px;height:420px;margin:-210px 0 0 -210px;border-radius:50%;opacity:0;transition:opacity .5s;
+background:repeating-conic-gradient(var(--ray) 0 7deg,transparent 7deg 18deg);-webkit-mask:radial-gradient(circle,#000 8%,transparent 66%);mask:radial-gradient(circle,#000 8%,transparent 66%)}
+.stage.open .rays{opacity:1;animation:spin 14s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+#box{position:absolute;left:50%;bottom:0;width:210px;margin-left:-105px;overflow:visible;filter:drop-shadow(0 14px 22px rgba(200,79,216,.35))}
+#box.shake{animation:sh .9s}
+@keyframes sh{15%{transform:rotate(-6deg) scale(1.03)}30%{transform:rotate(6deg) scale(1.05)}45%{transform:rotate(-5deg) scale(1.05)}60%{transform:rotate(4deg)}80%{transform:rotate(-2deg)}}
+#lid{transform-box:fill-box;transform-origin:50% 100%;transition:transform .55s cubic-bezier(.3,1.6,.5,1)}
+.stage.open #lid{transform:translate(-34px,-82px) rotate(-24deg)}
+.stage i{position:absolute;left:50%;top:48%;width:8px;height:13px;border-radius:2px;animation:fly 1.3s cubic-bezier(.1,.7,.3,1) forwards}
+@keyframes fly{to{transform:translate(var(--x),calc(var(--y) + 110px)) rotate(var(--r));opacity:0}}
+.res{min-height:96px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;margin:8px 0 14px}
+.card{padding:14px 26px;border-radius:20px;border:1px solid var(--pc);background:var(--glass);box-shadow:0 0 30px color-mix(in srgb,var(--pc) 55%,transparent),inset 0 0 20px color-mix(in srgb,var(--pc) 18%,transparent);animation:rise .6s cubic-bezier(.2,1.4,.4,1)}
+.card em{display:block;font-style:normal;font-size:11px;letter-spacing:.3em;color:var(--pc);margin-bottom:2px}
+.card strong{font:700 26px var(--serif);color:var(--ink)}
+@keyframes rise{from{transform:translateY(24px) scale(.7);opacity:0}}
+.row{display:grid;grid-template-columns:12px 1fr auto;gap:2px 10px;align-items:center;padding:8px 0}
+.row i{width:10px;height:10px;border-radius:50%;background:var(--c);box-shadow:0 0 10px var(--c)}
+.row b{font:700 15px var(--serif)}
+.row s{grid-column:2/4;height:4px;border-radius:4px;background:var(--line);text-decoration:none;overflow:hidden}
+.row s u{display:block;height:100%;border-radius:4px;background:var(--c);text-decoration:none}
+.hist{list-style:none;margin:0;padding:0;font-size:14px}
+.hist li{display:flex;justify-content:space-between;padding:8px 0;border-top:1px solid var(--line)}.hist li:first-child{border-top:0}
+.hist time{color:var(--mute);font-size:12px}
+.g{display:grid;grid-template-columns:1fr 84px;gap:2px 10px;align-items:center}.g input{margin:0 0 8px;padding:9px 12px}.g label{font-size:13px}
+textarea{font:12px monospace;width:100%;height:84px;border-radius:16px;border:1px solid var(--line);background:var(--glass);color:var(--ink);margin:12px 0 8px;padding:10px;resize:none;word-break:break-all}
+.hide{display:none}
+.foot{text-align:center;margin-top:28px}.foot button{background:none;border:0;color:var(--mute);font:inherit;font-size:12px;opacity:.7}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+<div class="hd"><small>PINK PARADISE SHOP</small><h1>랜덤박스</h1></div>
+
+<section class="glass" id="gate">
+  <h2>티켓 입장</h2>
+  <p class="msg" style="margin:0 0 12px">운영진에게 받은 티켓 코드를 붙여넣어 주세요.</p>
+  <input id="code" placeholder="PINK-…" autocomplete="off" autocapitalize="off">
+  <button class="btn" id="enter">입장하기</button>
+  <p class="msg err" id="gerr"></p>
+</section>
+
+<div id="game" class="hide">
+  <section class="glass">
+    <div class="top"><span class="who" id="nm"></span><span class="pill">남은 기회<b id="left">0</b></span></div>
+    <div class="stage" id="stage">
+      <div class="rays"></div>
+      <svg id="box" viewBox="0 0 220 230" aria-hidden="true">
+        <defs>
+          <linearGradient id="gb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff8cc2"/><stop offset="1" stop-color="#cf3a8a"/></linearGradient>
+          <linearGradient id="gl" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffb0d6"/><stop offset="1" stop-color="#ee5fa6"/></linearGradient>
+          <linearGradient id="gr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff2c2"/><stop offset="1" stop-color="#f2b640"/></linearGradient>
+        </defs>
+        <ellipse cx="110" cy="216" rx="80" ry="8" fill="rgba(0,0,0,.25)"/>
+        <rect x="38" y="106" width="144" height="106" rx="12" fill="url(#gb)"/>
+        <rect x="38" y="106" width="144" height="14" fill="rgba(0,0,0,.14)"/>
+        <rect x="96" y="106" width="28" height="106" fill="url(#gr)"/>
+        <g id="lid"><rect x="26" y="72" width="168" height="42" rx="12" fill="url(#gl)"/><rect x="96" y="72" width="28" height="42" fill="url(#gr)"/>
+          <path d="M110 72C82 24 40 40 68 70Q90 77 110 72ZM110 72C138 24 180 40 152 70Q130 77 110 72Z" fill="url(#gr)"/><circle cx="110" cy="72" r="11" fill="url(#gr)"/></g>
+      </svg>
+    </div>
+    <div class="res" id="res" aria-live="polite"><span class="msg">박스를 열어보세요</span></div>
+    <button class="btn" id="open">박스 열기</button>
+    <button class="link" id="exit">나가기 · 다른 티켓 입력</button>
+  </section>
+  <section class="glass"><h2>내 확률표</h2><div id="tbl"></div></section>
+  <section class="glass"><h2>열어본 기록</h2><ul class="hist" id="hist"></ul></section>
+</div>
+
+<section class="glass hide" id="admin">
+  <div class="top"><h2 style="margin:0">운영진 · 티켓 발급</h2><button class="btn s" id="aclose">닫기</button></div>
+  <input id="an" placeholder="받는 사람 이름" style="margin-top:14px">
+  <input id="ac" type="number" min="1" value="1" inputmode="numeric" placeholder="기회 횟수">
+  <div class="g" id="ag"></div>
+  <p class="msg" id="asum"></p>
+  <div style="display:flex;gap:10px;margin-top:8px"><button class="btn s" id="adef">기본 확률</button><button class="btn" id="aok">티켓 발급</button></div>
+  <textarea id="aout" readonly placeholder="발급된 코드가 여기에 나와요"></textarea>
+  <button class="btn s" id="acopy">코드 복사</button>
+  <h2 style="margin-top:20px">발급 내역</h2><ul class="hist" id="ahist"></ul>
+</section>
+
+<div class="foot"><button id="abtn">운영진</button>
+  <div class="hide" id="pinbox" style="margin-top:8px"><input id="pin" type="password" placeholder="운영진 PIN" style="max-width:200px"></div></div>
+</main>
+
+<script>
+const SALT="pps-7Qk2",PIN="pink2026";
+const P=[["꽝","#9aa3b8"],["자판기 500원권","#5bc0ff"],["부스트 8개","#b98cff"],["랜덤장식 2개","#ff7ab8"],["선택장식 2개","#ffb04a"],["니트로프라임 1개","#ffd84a"]];
+const DEF=[30,20,30,15,4,1],$=id=>document.getElementById(id);
+const ls={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+function hs(s){let x=2166136261;s+=SALT;for(let i=0;i<s.length;i++){x^=s.charCodeAt(i);x=Math.imul(x,16777619)>>>0}return x.toString(36)}
+const enc=s=>btoa(unescape(encodeURIComponent(s))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
+const dec=s=>decodeURIComponent(escape(atob(s.replace(/-/g,"+").replace(/_/g,"/"))));
+function parse(c){try{const m=c.trim().match(/^PINK-([\w-]+)\.([0-9a-z]+)$/);if(!m||hs(m[1])!==m[2])return null;
+const[name,n,ps]=dec(m[1]).split("|"),p=ps.split(",").map(Number);
+if(p.length!==6||p.some(v=>!(v>=0))||Math.abs(p.reduce((a,b)=>a+b,0)-100)>.001||!(+n>=1))return null;
+return{code:m[0],key:m[2],name,n:+n,p}}catch(e){return null}}
+function draw(p){const a=new Uint32Array(1);crypto.getRandomValues(a);let r=a[0]/4294967296*100,s=0;
+for(let i=0;i<6;i++){s+=p[i];if(r<s&&p[i]>0)return i}return p.findLastIndex(v=>v>0)}
+const now=()=>new Date().toLocaleString("ko-KR",{month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit"});
+
+let T=null,spinning=false;
+const used=()=>+ls.get("pps_u_"+T.key)||0,hist=()=>{try{return JSON.parse(ls.get("pps_h_"+T.key)||"[]")}catch(e){return[]}};
+function render(){
+  const left=Math.max(0,T.n-used());
+  $("nm").textContent=T.name+" 님";$("left").textContent=left;
+  $("open").disabled=left<=0;$("open").textContent=left<=0?"기회를 모두 사용했어요":"박스 열기";
+  $("tbl").innerHTML=P.map((x,i)=>`<div class="row" style="--c:${x[1]}"><i></i><span>${x[0]}</span><b>${T.p[i]}%</b><s><u style="width:${Math.min(100,T.p[i]*3.3)}%"></u></s></div>`).join("");
+  $("hist").innerHTML=hist().map(h=>`<li><span>${h.n}</span><time>${h.t}</time></li>`).join("")||'<li class="msg">아직 없어요</li>';
+}
+function enter(c,quiet){
+  const t=parse(c);
+  if(!t){if(!quiet)$("gerr").textContent="코드가 올바르지 않아요. 다시 확인해주세요.";return}
+  T=t;ls.set("pps_last",t.code);$("gate").classList.add("hide");$("game").classList.remove("hide");render();
+}
+$("enter").onclick=()=>enter($("code").value);
+function burst(big){
+  if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;
+  const st=$("stage"),cols=["#ff7ab8","#ffd84a","#b98cff","#5bc0ff","#fff"];
+  for(let k=0;k<(big?64:34);k++){const s=document.createElement("i"),a=Math.random()*6.283,d=70+Math.random()*130;
+    s.style.cssText=`--x:${Math.cos(a)*d}px;--y:${Math.sin(a)*d-60}px;--r:${Math.random()*720-360}deg;background:${cols[k%5]}`;
+    st.appendChild(s);setTimeout(()=>s.remove(),1500)}
+}
+$("open").onclick=()=>{
+  if(T.n-used()<=0||spinning)return;
+  spinning=true;ls.set("pps_u_"+T.key,used()+1);
+  const i=draw(T.p),t=now(),h=hist();h.unshift({n:P[i][0],t});ls.set("pps_h_"+T.key,JSON.stringify(h.slice(0,20)));
+  $("left").textContent=Math.max(0,T.n-used());$("open").disabled=true;
+  const b=$("box"),st=$("stage");st.classList.remove("open");b.classList.remove("shake");void b.getBoundingClientRect();b.classList.add("shake");
+  $("res").innerHTML='<span class="msg">두근두근…</span>';
+  setTimeout(()=>{
+    b.classList.remove("shake");st.classList.add("open");burst(i>=4);
+    $("res").innerHTML=`<div class="card" style="--pc:${P[i][1]}"><em>${i==5?"LEGEND":i==4?"RARE":i==0?"NEXT TIME":"WIN"}</em><strong>${P[i][0]}</strong></div>`;
+    spinning=false;render();
+  },950);
+};
+$("exit").onclick=()=>{
+  if(spinning)return;
+  T=null;ls.set("pps_last","");
+  $("game").classList.add("hide");$("gate").classList.remove("hide");
+  $("code").value="";$("gerr").textContent="";$("stage").classList.remove("open");
+  $("res").innerHTML='<span class="msg">박스를 열어보세요</span>';window.scrollTo(0,0);
+};
+
+// 운영진
+$("abtn").onclick=()=>$("pinbox").classList.toggle("hide");
+$("aclose").onclick=()=>$("admin").classList.add("hide");
+$("pin").oninput=e=>{if(e.target.value===PIN){$("admin").classList.remove("hide");$("pinbox").classList.add("hide");e.target.value="";$("admin").scrollIntoView()}};
+$("ag").innerHTML=P.map((x,i)=>`<label>${x[0]} (%)</label><input type="number" step="any" min="0" inputmode="decimal">`).join("");
+const pin=()=>[...document.querySelectorAll("#ag input")];
+function setDef(){pin().forEach((e,i)=>e.value=DEF[i]);sum()}
+function sum(){const s=pin().reduce((a,e)=>a+(+e.value||0),0),ok=Math.abs(s-100)<.001;
+  $("asum").textContent="합계 "+Math.round(s*1000)/1000+"% "+(ok?"✔":"· 100%가 되어야 해요");$("asum").className="msg"+(ok?"":" err");return ok}
+$("ag").oninput=sum;$("adef").onclick=setDef;setDef();
+let issued=[];try{issued=JSON.parse(ls.get("pps_issued")||"[]")}catch(e){}
+function rAdm(){$("ahist").innerHTML=issued.map(x=>`<li><span>${x.n} · ${x.c}회</span><time>${x.t}</time></li>`).join("")||'<li class="msg">아직 없어요</li>'}
+rAdm();
+$("aok").onclick=()=>{
+  const n=$("an").value.trim().replace(/\|/g,""),c=Math.floor(+$("ac").value);
+  if(!n||!(c>=1)){$("asum").textContent="이름과 기회 횟수를 입력해주세요";$("asum").className="msg err";return}
+  if(!sum())return;
+  const id=Math.random().toString(36).slice(2,6),b=enc([n,c,pin().map(e=>+e.value).join(","),id].join("|"));
+  $("aout").value="PINK-"+b+"."+hs(b);
+  issued.unshift({n,c,t:now()});ls.set("pps_issued",JSON.stringify(issued.slice(0,30)));rAdm();
+};
+$("acopy").onclick=async()=>{const t=$("aout");if(!t.value)return;try{await navigator.clipboard.writeText(t.value);$("acopy").textContent="복사됨!"}catch(e){t.select();$("acopy").textContent="길게 눌러 복사"}setTimeout(()=>$("acopy").textContent="코드 복사",1500)};
+
+const last=ls.get("pps_last");if(last)enter(last,true);
+</script>
+</body>
+</html>
